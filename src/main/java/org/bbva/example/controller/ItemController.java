@@ -1,9 +1,9 @@
 package org.bbva.example.controller;
 
 import org.bbva.example.ItemRepository;
-import org.bbva.example.model.Item;
+import org.bbva.example.errors.ItemNotFoundException;
+import org.bbva.example.model.ItemModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,18 +15,19 @@ public class ItemController {
     ItemRepository itemRepository;
 
     @GetMapping("/items")
-    List<Item> all() {
+    List<ItemModel> all() {
         return itemRepository.findAll();
     }
 
     @GetMapping("/items/{id}")
-    Item getById(@PathVariable Long id) {
-        return itemRepository.findById(id).get();
+    ItemModel getById(@PathVariable Long id) {
+        return itemRepository.findById(id)
+                .orElseThrow(() -> new ItemNotFoundException(id));
     }
 
     @PostMapping("/items")
-    Item createNew(@RequestBody Item newItem) {
-        return itemRepository.save(newItem);
+    ItemModel createNew(@RequestBody ItemModel newItemModel) {
+        return itemRepository.save(newItemModel);
     }
 
     @DeleteMapping("/items/{id}")
@@ -35,17 +36,17 @@ public class ItemController {
     }
 
     @PutMapping("/items/{id}")
-    Item updateOrCreate(@RequestBody Item newItem, @PathVariable Long id) {
+    ItemModel updateOrCreate(@RequestBody ItemModel newItemModel, @PathVariable Long id) {
         return itemRepository.findById(id)
-                .map(item -> {
-                    item.setName(newItem.getName());
+                .map(itemModel -> {
+                    itemModel.setName(newItemModel.getName());
 
-                    return itemRepository.save(item);
+                    return itemRepository.save(itemModel);
                 })
                 .orElseGet(() -> {
-                    newItem.setId(id);;
+                    newItemModel.setId(id);;
 
-                    return itemRepository.save(newItem);
+                    return itemRepository.save(newItemModel);
                 });
     }
 
