@@ -6,6 +6,7 @@ import org.bbva.example.model.ItemModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -26,7 +27,7 @@ public class ItemController {
     }
 
     @PostMapping("/items")
-    ItemModel createNew(@RequestBody ItemModel newItemModel) {
+    ItemModel createNew(@Valid @RequestBody ItemModel newItemModel) {
         return itemRepository.save(newItemModel);
     }
 
