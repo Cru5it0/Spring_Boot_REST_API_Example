@@ -10,12 +10,14 @@
 	</parent>
 	<groupId>org.bbva</groupId>
 	<artifactId>Spring_Boot_REST_API_Example</artifactId>
+	<packaging>jar</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Spring_Boot_REST_API_Example</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
+
 	<dependencies>
 
 		<dependency>
