@@ -1,6 +1,6 @@
 package org.bbva.example.controller;
 
-import org.bbva.example.ItemRepository;
+import org.bbva.example.model.ItemRepository;
 import org.bbva.example.errors.ItemNotFoundException;
 import org.bbva.example.model.ItemModel;
 import org.springframework.beans.factory.annotation.Autowired;

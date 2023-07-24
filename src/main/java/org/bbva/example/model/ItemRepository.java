@@ -1,4 +1,4 @@
-package org.bbva.example;
+package org.bbva.example.model;
 
 import org.bbva.example.model.ItemModel;
 
