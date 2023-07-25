@@ -1,4 +1,4 @@
-package org.bbva.example.controller;
+package org.bbva.example.errors;
 
 import org.bbva.example.errors.ItemNotFoundException;
 import org.springframework.http.HttpStatus;
